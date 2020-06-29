@@ -27,11 +27,12 @@ max(AAO, na.rm = T) # 85
 mean(AAO, na.rm = T) # 60.3
 sd(AAO, na.rm = T) # 10.11
 ```
-**Test GWAS significant variants on AGE AT ONSET:**  
+**Test GWAS significant variants on AGE AT ONSET.**  
+Using covariates sex and PC1-5:
 ```R
 aao_fun = function(x) {
   fit = glm(data$AAO ~ x + data$sex + data$PC1 + data$PC2 + data$PC3 + data$PC4 + data$PC5)
-  return(fit) # take only the variant results. 
+  return(fit) 
 }
 
 z = matrix(, nrow = ncol(variants), ncol = 5, dimnames = list(colnames(variants), 
@@ -42,9 +43,11 @@ for (i in 1:ncol(variants))
   z[i,1] = coef(summary(f))[2,1]
   z[i,2] = coef(summary(f))[2,2]
   z[i,3] = coef(summary(f))[2,3]
-  z[i,4] = coef(summary(f))[2,4] }
+  z[i,4] = coef(summary(f))[2,4]
+  z[i,5] = "" }
 
 write.table(z, file="AAO_regression.txt", col.names=T, row.names=T, sep="\t", quote=F)
 ````
+
 
 
