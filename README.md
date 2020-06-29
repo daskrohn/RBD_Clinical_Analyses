@@ -9,7 +9,7 @@ Clinical analysis for the RBD GWAS - June 2020
 * Genotypes were collected from imputed GWAS data - only common variants were included (+ known variant N370S).  
 
 ## Clinical analysis (on cases only). 
-**Load libraries & data:**  
+**Load libraries & data.**  
 Data includes two files:  
 * data = complete covariate csv created as described above
 * variants = csv containing only the GWAS significant variants *in the same sample order as the covariate csv.*  
