@@ -11,17 +11,17 @@ Clinical analysis for the RBD GWAS - June 2020
 ## Clinical analysis (on cases only). 
 **Load libraries & data.**  
 Data includes two files:  
-* data = complete covariate csv created as described above
+* covar = complete covariate csv created as described above
 * variants = csv containing only the GWAS significant variants *in the same sample order as the covariate csv.*  
 ```R
 library(devtools)
 install_github("dgrtwo/broom")
 library(broom)
 
-data = read.csv("cases_analysesInR.csv", header = T)
+covar = read.csv("cases_analysesInR.csv", header = T)
 variants = read.csv("VARIANTSfor_cases_analysesInR.csv")
 
-attach(data)
+attach(covar)
 ````
 **AAO Summary:**
 ```R
@@ -33,22 +33,26 @@ sd(AAO, na.rm = T) # 10.11
 **Test GWAS significant variants on AGE AT ONSET.**  
 Using covariates sex and PC1-5:
 ```R
+# create a function to run regression
 aao_fun = function(x) {
-  fit = glm(data$AAO ~ x + data$sex + data$PC1 + data$PC2 + data$PC3 + data$PC4 + data$PC5)
-  return(fit) 
+  fit = glm(covar$AAO ~ x + covar$sex + covar$PC1 + covar$PC2 + covar$PC3 + covar$PC4 + covar$PC5)
+  return(fit) # take only the variant results. 
 }
 
+# create an empty matrix to put results
 z = matrix(, nrow = ncol(variants), ncol = 5, dimnames = list(colnames(variants), 
                                                               c("variant", "estimate","se","statistic","p")))
 
+# run regression on all variants
 for (i in 1:ncol(variants))
 { f = aao_fun(variants[,i])
   z[i,1] = coef(summary(f))[2,1]
   z[i,2] = coef(summary(f))[2,2]
   z[i,3] = coef(summary(f))[2,3]
   z[i,4] = coef(summary(f))[2,4]
-  z[i,5] = "" }
+  z[i,5] = ""}
 
+# save results
 write.table(z, file="AAO_regression.txt", col.names=T, row.names=T, sep="\t", quote=F)
 ````
 
