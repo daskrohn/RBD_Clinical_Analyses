@@ -29,6 +29,19 @@ min(AAO, na.rm = T) # 18
 max(AAO, na.rm = T) # 85
 mean(AAO, na.rm = T) # 60.3
 sd(AAO, na.rm = T) # 10.11
+
+has_aao = subset(covar, AAO != "NA")
+nrow(has_aao) # 699
+````
+**AADx Summary:**
+```R
+min(AADx, na.rm = T) # 28
+max(AADx, na.rm = T) # 89
+mean(AADx, na.rm = T) # 65.38
+sd(AADx, na.rm = T) # 8.49
+
+has_aadx = subset(covar, AADx != "NA")
+nrow(has_aadx) # 660
 ```
 **Test GWAS significant variants on AGE AT ONSET.**  
 Using covariates sex and PC1-5:
