@@ -69,5 +69,11 @@ for (i in 1:ncol(variants))
 write.table(z, file="AAO_regression.txt", col.names=T, row.names=T, sep="\t", quote=F)
 ````
 
+## Effect of variants on rate and type of conversion  
+* Time to conversion is calculated as the difference between AADx of RBD and AADx of overt neurodegeneration.  
+* All who converted to *any* overt neurodegeneration are included (summary of types below).  
+* For those who have not converted, time to conversion is the difference between their AADx RBD and age at last follow-up. *If last follow-up is ambiguous, their age in 2018 was used (year of last collection of clinical data).  
+
+
 
 
