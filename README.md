@@ -8,7 +8,7 @@ Clinical analysis for the RBD GWAS - June 2020
 * Date of last follow up used as indicated unless YEAR OF FOLLOW UP - YEAR OF BIRTH - YEAR OF RBD ONSET/DIAGNOSIS was negative. In this case, 2018 was used (last collection of clinical data).  
 * Genotypes were collected from imputed GWAS data - only common variants were included (+ known variant N370S).  
 
-## Clinical analysis (on cases only). 
+## Effect of variants on AAO/AADx 
 **Load libraries & data.**  
 Data includes two files:  
 * covar = complete covariate csv created as described above
