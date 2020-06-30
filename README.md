@@ -49,7 +49,7 @@ Using covariates sex and PC1-5:
 # create a function to run regression
 aao_fun = function(x) {
   fit = glm(covar$AAO ~ x + covar$sex + covar$PC1 + covar$PC2 + covar$PC3 + covar$PC4 + covar$PC5)
-  return(fit) # take only the variant results. 
+  return(fit) 
 }
 
 # create an empty matrix to put results
