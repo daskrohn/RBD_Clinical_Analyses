@@ -139,4 +139,4 @@ p2
 
 dev.off()
 ```
-![KMS Plot](TMEM175_Survival.tiff)
+![KMS Plot](TMEM175_Survival copy.png)
