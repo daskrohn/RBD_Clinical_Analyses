@@ -111,11 +111,31 @@ other = subset(s, TOC_code == 4)
 nrow(other) # 13
 ````
 
-### ANOVA
+### TMEM175
+**ANOVA**
 ```R
 fit <- aov(TTC_AADx ~ as.factor(TMEM175_C), data=s)
 summary(fit)
 effects <- model.tables(fit, type = 'effects')
-effects
+effects # WT = 278, Htz = 189, Hmz = 21
 ```
+**KMS**
+```R
+require(RColorBrewer)
+require(survival)
+require(survminer)
+require(ggplot2)
+require(dplyr)
 
+tiff('TMEM175_Survival.tiff', units="in", width=6, height=5, res=300, compression = 'lzw')
+
+fit1 <- survfit(Surv(s$TTC_AADx, as.numeric(s$Converted_1_0)) ~ s$TMEM175_C, data=s)
+plot(fit1)
+summary(fit1)
+p2 <- ggsurvplot(fit1, data = s, title = "Kaplan-Meier Survival Plot", 
+                 pval = TRUE, pval.coord=c(15,0.75), xlab="Time to Conversion (Years)",
+                 ggtheme = theme_classic2(base_size=15, base_family = "Arial"), font.family = "Arial")
+p2
+
+dev.off()
+```
