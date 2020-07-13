@@ -75,5 +75,47 @@ write.table(z, file="AAO_regression.txt", col.names=T, row.names=T, sep="\t", qu
 * For those who have not converted, time to conversion is the difference between their AADx RBD and age at last follow-up. *If last follow-up is ambiguous, their age in 2018 was used (year of last collection of clinical data).  
 
 
+### Summary
+```R
+converted = subset(covar, TOC_code != "NA")
+nrow(converted) # 264
 
+known = subset(covar, Converted_1_0 != "U")
+nrow(known) # 629 with conversion data
+629 - 264 # 365 not yet converted
+
+# subsets (all)
+pd = subset(covar, TOC_code == 1)
+nrow(pd) # 182
+dlb = subset(covar, TOC_code == 2)
+nrow(dlb) # 32
+msa = subset(covar, TOC_code == 3)
+nrow(msa) # 18
+other = subset(covar, TOC_code == 4)
+nrow(other) # 32
+
+# total with all data
+s = subset(known, TTC_AADx != "NA")
+nrow(s) # 488 have AADx
+n = subset(s, Converted_1_0 == 1)
+nrow(n) # 127 with AADx converted
+
+# subsets with AADx 
+pd = subset(s, TOC_code == 1)
+nrow(pd) # 76
+dlb = subset(s, TOC_code == 2)
+nrow(dlb) # 27
+msa = subset(s, TOC_code == 3)
+nrow(msa) # 11
+other = subset(s, TOC_code == 4)
+nrow(other) # 13
+````
+
+### ANOVA
+```R
+fit <- aov(TTC_AADx ~ as.factor(TMEM175_C), data=s)
+summary(fit)
+effects <- model.tables(fit, type = 'effects')
+effects
+```
 
